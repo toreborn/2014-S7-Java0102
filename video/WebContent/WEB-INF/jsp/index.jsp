@@ -49,6 +49,8 @@
 				z-index:6;
 				display:none;
 				padding:10px;
+				box-shadow:10px 10px 5px #A23400;
+				border-radius:8px;
 			}
 			.cancelSpan{
 				display:block;
@@ -65,7 +67,39 @@
 				color:red;
 				cursor:pointer;
 			}
+			.inputSpan{
+				display:block;
+				margin-top:30px;
+				font-size:20px;
+			}
+			.inputSpan label{
+				width:25%;
+				display:inline-block;
+			}
+			.inputSpan input{
+				width:70%;
+				outline:none;
+				border:none;
+				border-bottom:1px solid red;
+			}
+			.submitSpan{
+				width:85%;
+				background-color:#7373B9;
+				display:block;
+				height:40px;
+				border-radius:5px;
+				margin:25px auto 0 auto;
+				font-size:20px;
+				line-height:40px;
+				text-align:center;
+			}
+			.submitSpan:hover{
+				cursor:pointer;
+			}
 		</style>
+		<%
+			String username = (String)request.getSession().getAttribute("username");
+		%>
 	</head>
 <body>
 	<div class="head">
@@ -78,20 +112,45 @@
 			<input type="submit" style="height:30px;"/>
 		</span>
 		<span class="userinfo">
-			<a href="javascript:login()">登录</a>|<a href="javascript:register()">注册</a>
+			<%if(username == null || "".equals(username)){ %>
+				<a href="javascript:login()">登录</a>|<a href="javascript:register()">注册</a>
+			<%}else{ %>
+				<a href=""><%=username %></a>&nbsp;|&nbsp;<a href="">登出</a>
+			<%} %>
 		</span>
 	</div>
 	
 	<div id="shadowDiv">
 	</div>
-	<div id="login">
-		<span class="cancelSpan">x</span>
-	</div>
+	<form action="<%=request.getContextPath() %>/login" method="post">
+		<div id="login">
+			<span class="cancelSpan" onclick="cancel()">x</span>
+			<span class="inputSpan" style="margin-top:50px;">
+				<label for="username">用户名：</label>
+				<input type="text" name="username" id="username" />
+			</span>
+			<span class="inputSpan">
+				<label>密码：</label>
+				<input type="password" name="pw" />
+			</span>
+			<span class="submitSpan">
+				<a href="javascript:submit()" style="text-decoration:none;">登&nbsp;&nbsp;录</a>
+			</span>
+		</div>
+	</form>
 </body>
 <script>
 	function login(){
 		document.getElementById("shadowDiv").style.display="block";
 		document.getElementById("login").style.display="block";
+	}
+	function cancel(){
+		document.getElementById("shadowDiv").style.display="none";
+		document.getElementById("login").style.display="none";
+	}
+	function submit(){
+		// valid
+		document.forms[0].submit();
 	}
 </script>
 
