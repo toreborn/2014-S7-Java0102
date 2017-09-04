@@ -1,6 +1,13 @@
 package com.demo.org;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +47,41 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("pw");
 		
 		//valid
-		request.getSession().setAttribute("username", username);
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost/java0102s7?user=root&password=demo";
+			con = DriverManager.getConnection(url);
+			
+			String sqlStr = "select count(1) cnt from account"
+					+ " where username=? and password=?";
+			
+			PreparedStatement ps = con.prepareStatement(sqlStr);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				int cnt = rs.getInt("cnt");
+				if(cnt == 1) {
+					request.getSession().setAttribute("username", username);
+				}
+			}
+			
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch( SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(con != null) {
+				try{
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
 		//invalid
 		// do nothing

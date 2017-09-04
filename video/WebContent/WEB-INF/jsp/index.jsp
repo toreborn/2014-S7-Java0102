@@ -115,7 +115,7 @@
 			<%if(username == null || "".equals(username)){ %>
 				<a href="javascript:login()">登录</a>|<a href="javascript:register()">注册</a>
 			<%}else{ %>
-				<a href=""><%=username %></a>&nbsp;|&nbsp;<a href="">登出</a>
+				<a href=""><%=username %></a>&nbsp;|&nbsp;<a href="<%=request.getContextPath() %>/logout">登出</a>
 			<%} %>
 		</span>
 	</div>
