@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.*" />
+
+	<!-- <bean id="bc01" class="com.demo.org.bean.BeanClass01" scope="prototype">
+		<constructor-arg name="msg" value="This is constructor msg" />
+	</bean>
+	
+	<bean id="bcf" class="com.demo.org.bean.BeanClassFactory" />
+	
+	<bean id="bc0102" factory-bean="bcf" factory-method="createBean" />
+
+	<bean id="bc02" class="com.demo.org.bean.BeanClass02" /> -->
+
+
+	<bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/java0102s7" />
+		<property name="username" value="j0102s7" />
+		<property name="password" value="j0102s7" />
+	</bean>
+
+</beans>
