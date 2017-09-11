@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 			String url = "jdbc:mysql://localhost/java0102s7?user=root&password=demo";
 			con = DriverManager.getConnection(url);
 			
-			String sqlStr = "select count(1) cnt from account"
+			String sqlStr = "select id from account"
 					+ " where username=? and password=?";
 			
 			PreparedStatement ps = con.prepareStatement(sqlStr);
@@ -63,10 +63,9 @@ public class LoginServlet extends HttpServlet {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				int cnt = rs.getInt("cnt");
-				if(cnt == 1) {
-					request.getSession().setAttribute("username", username);
-				}
+				int id = rs.getInt("id");
+				request.getSession().setAttribute("username", username);
+				request.getSession().setAttribute("id", id);
 			}
 			
 		}catch(ClassNotFoundException e) {

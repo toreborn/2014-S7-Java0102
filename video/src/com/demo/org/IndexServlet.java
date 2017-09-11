@@ -36,7 +36,7 @@ public class IndexServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		Connection con = null;
+		/*Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost/java0102s7?user=root&password=demo";
@@ -62,7 +62,7 @@ public class IndexServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		}
+		}*/
 		
 		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 	}

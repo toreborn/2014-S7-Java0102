@@ -30,7 +30,7 @@ public class LogoutServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	
 		request.getSession().removeAttribute("username");
-	
+		request.getSession().removeAttribute("id");
 		response.sendRedirect(request.getContextPath()+"/Index");
 	}
 
