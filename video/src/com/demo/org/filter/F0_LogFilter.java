@@ -18,12 +18,12 @@ import com.demo.org.service.impl.LogServiceImpl;
  * Servlet Filter implementation class LogFilter
  */
 @WebFilter(filterName="logFilter",urlPatterns="/*")
-public class LogFilter implements Filter {
+public class F0_LogFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public LogFilter() {
+    public F0_LogFilter() {
         // TODO Auto-generated constructor stub
     }
 
